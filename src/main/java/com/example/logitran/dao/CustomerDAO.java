@@ -14,4 +14,6 @@ public interface CustomerDAO {
     String deleteCustomer(int customerId);
 
     Customer getCustomerByEmail(String email);
+
+    Customer getCustomerByContact(String contact);
 }

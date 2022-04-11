@@ -20,7 +20,6 @@ com/example/logitran/dao/DriverDAO.class
 com/example/logitran/service/CustomerService.class
 com/example/logitran/serviceImpl/VehicleServiceImpl.class
 com/example/logitran/dao/CompanyDAO.class
-com/example/logitran/security/UserDetailsServiceImpl.class
 com/example/logitran/LogitranApplication.class
 com/example/logitran/dao/VehicleDAO.class
 com/example/logitran/serviceImpl/CompanyServiceImpl.class
@@ -29,11 +28,11 @@ com/example/logitran/entity/Role.class
 com/example/logitran/entity/Driver.class
 com/example/logitran/controller/ControllerAdvise.class
 com/example/logitran/entity/Vehicle.class
-com/example/logitran/security/SecurityConfig.class
 com/example/logitran/daoimpl/AccountDAOImpl.class
 com/example/logitran/entity/Account.class
 com/example/logitran/entity/Company.class
 com/example/logitran/entity/Customer.class
+com/example/logitran/Validation/Validation.class
 com/example/logitran/daoimpl/CompanyDAOImpl.class
 com/example/logitran/service/VehicleService.class
 com/example/logitran/serviceImpl/DriverServiceImpl.class

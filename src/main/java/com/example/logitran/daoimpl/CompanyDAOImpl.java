@@ -54,7 +54,7 @@ public class CompanyDAOImpl implements CompanyDAO {
                 company1.setName(company.getName());
                 company1.setAccId(company.getAccId());
                 company1.setDelete(company.isDelete());
-                company1.setInterState(company.isInterState());
+//                company1.setInterState(company.isInterState());
 
                 session.update(company1);
             } catch (Exception e) {
@@ -79,16 +79,16 @@ public class CompanyDAOImpl implements CompanyDAO {
         return "Successfully deleted";
     }
 
-    @Override
-    public List<Company> getCompanyInterState(boolean isInterState) {
-        Session session = entityManager.unwrap(Session.class);
-
-        Query<Company> query = session.createQuery("from Company where is_inter_state=:isInterState and is_delete=0",Company.class);
-        query.setParameter("isInterState",isInterState);
-        List<Company> companiesInterState = query.getResultList();
-
-        return companiesInterState;
-    }
+//    @Override
+//    public List<Company> getCompanyInterState(boolean isInterState) {
+//        Session session = entityManager.unwrap(Session.class);
+//
+//        Query<Company> query = session.createQuery("from Company where is_inter_state=:isInterState and is_delete=0",Company.class);
+//        query.setParameter("isInterState",isInterState);
+//        List<Company> companiesInterState = query.getResultList();
+//
+//        return companiesInterState;
+//    }
 
     @Override
     public Company getCompanyByEmailId(String email) {
@@ -107,5 +107,22 @@ public class CompanyDAOImpl implements CompanyDAO {
         }
 
         return company;
+    }
+
+    @Override
+    public Company getCustomerByContact(String contactNo) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Company> query = session.createQuery("from Company where contact_no=:contactNo",Company.class);
+
+        query.setParameter("contactNo",contactNo);
+        Company company = null;
+        try {
+            System.out.println("in try");
+            company = query.getSingleResult();
+            return company;
+        }catch (Exception e){
+            return null;
+        }
     }
 }

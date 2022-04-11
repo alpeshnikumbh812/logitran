@@ -1,5 +1,6 @@
 package com.example.logitran.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
@@ -32,9 +33,11 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
+    @JsonIgnore
     @Column(name="acc_id")
     private int accId;
 
+    @JsonIgnore
     @Column(columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public boolean isDelete;
@@ -53,7 +56,6 @@ public class Customer {
                 "customerId=" + customerId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", contactNo='" + contactNo + '\'' +
                 ", address='" + address + '\'' +
                 '}';

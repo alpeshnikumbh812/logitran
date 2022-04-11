@@ -1,5 +1,6 @@
 package com.example.logitran.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,13 +38,11 @@ public class Company {
     @Column(name = "address")
     private String address;
 
+    @JsonIgnore
     @Column(name="acc_id")
     private int accId;
 
-    @Column(columnDefinition = "TINYINT")
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    public boolean isInterState;
-
+    @JsonIgnore
     @Column(columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public boolean isDelete;
@@ -55,7 +54,6 @@ public class Company {
         this.password = password;
         this.contactNo = contactNo;
         this.address = address;
-        this.isInterState = isInterState;
     }
 
     @Override
@@ -67,7 +65,6 @@ public class Company {
                 ", password='" + password + '\'' +
                 ", contactNo='" + contactNo + '\'' +
                 ", address='" + address + '\'' +
-                ", isInterState=" + isInterState +
                 '}';
     }
 }

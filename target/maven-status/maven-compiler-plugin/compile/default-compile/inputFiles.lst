@@ -15,6 +15,7 @@
 /media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/service/CustomerService.java
 /media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/daoimpl/AccountDAOImpl.java
 /media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/LogitranApplication.java
+/media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/validation/CustomerValidation.java
 /media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/service/CompanyService.java
 /media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/daoimpl/CompanyDAOImpl.java
 /media/alpesh/SAM-DISK-1/Projects/logitran/src/main/java/com/example/logitran/service/DriverService.java

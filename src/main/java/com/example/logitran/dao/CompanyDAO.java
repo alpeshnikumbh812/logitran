@@ -11,6 +11,8 @@ public interface CompanyDAO {
     public Company getCompany(int companyId);
     public Company saveOrUpadateCompany(Company company);
     public String deleteCompany(int companyId);
-    public List<Company> getCompanyInterState(boolean isInterState);
+//    public List<Company> getCompanyInterState(boolean isInterState);
     public Company getCompanyByEmailId(String email);
+
+    Company getCustomerByContact(String contactNo);
 }

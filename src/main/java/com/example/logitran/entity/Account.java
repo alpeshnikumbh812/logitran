@@ -26,10 +26,10 @@ public class Account {
     @Column(name = "password")
     private String password;
 
-    @JsonIgnore
     @Column(name = "role_id")
     private int roleId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id",insertable = false,updatable = false)
     private Role role;

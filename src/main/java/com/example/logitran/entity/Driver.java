@@ -1,5 +1,6 @@
 package com.example.logitran.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +37,7 @@ public class Driver {
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public boolean isAvailable;
 
+    @JsonIgnore
     @Column(columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     public boolean isDelete;

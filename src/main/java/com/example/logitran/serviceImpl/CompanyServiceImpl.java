@@ -75,8 +75,8 @@ public class CompanyServiceImpl implements CompanyService {
         return delete;
     }
 
-    @Override
-    public List<Company> getCompanyInterStateOrNot(boolean isInterState) {
-        return companyDAO.getCompanyInterState(isInterState);
-    }
+//    @Override
+//    public List<Company> getCompanyInterStateOrNot(boolean isInterState) {
+//        return companyDAO.getCompanyInterState(isInterState);
+//    }
 }

@@ -11,6 +11,6 @@ public interface CompanyService {
     public Company getCompany(int companyId);
     public Company saveOrUpadateCompany(Company company);
     public String deleteCompany(int companyId);
-    public List<Company> getCompanyInterStateOrNot(boolean isInterState);
+//    public List<Company> getCompanyInterStateOrNot(boolean isInterState);
 
 }

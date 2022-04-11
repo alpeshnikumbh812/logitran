@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PostLoad;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -89,6 +91,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public Customer getCustomerByEmail(String email) {
 
+        System.out.println("Check11");
+        System.out.println(entityManager.unwrap(Session.class));
         Session session = entityManager.unwrap(Session.class);
 
         System.out.println("in method");
@@ -105,5 +109,23 @@ public class CustomerDAOImpl implements CustomerDAO {
         }
 
         return customer;
+    }
+
+    @Override
+    @Transactional
+    public Customer getCustomerByContact(String contact) {
+
+        Session session = entityManager.unwrap(Session.class);
+        Query<Customer> query = session.createQuery("from Customer where contact_no=:contact", Customer.class);
+        query.setParameter("contact", contact);
+
+        try{
+            Customer customer = query.getSingleResult();
+            return customer;
+        }
+        catch (Exception e){
+
+            return null;
+        }
     }
 }

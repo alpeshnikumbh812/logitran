@@ -39,12 +39,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public Customer saveOrUpadateCustomer(Customer customer) {
+    public Customer     saveOrUpadateCustomer(Customer customer) {
 
         int roleId = roleDAO.getRoleId("Customer");
+        System.out.println(roleId);
         if(customer.getCustomerId()==0){
             Account account = accountDAO.save(customer.getEmail(),customer.getPassword(),roleId);
-            System.out.println(account);
+            System.out.println(account + " " + customer.getPassword());
             customer.setAccId(account.getAccId());
         }
         else{

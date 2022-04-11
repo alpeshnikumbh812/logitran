@@ -4,11 +4,10 @@ import com.example.logitran.Request.UserRequest;
 import com.example.logitran.entity.Account;
 import com.example.logitran.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -19,5 +18,10 @@ public class LoginController {
     @PostMapping("/login-user")
     public Account login(@RequestBody UserRequest userRequest) {
         return accountService.getUserDetails(userRequest);
+    }
+
+    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String login() {
+        return "Hello world";
     }
 }
