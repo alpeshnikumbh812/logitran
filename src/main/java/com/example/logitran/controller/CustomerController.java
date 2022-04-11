@@ -54,12 +54,13 @@ public class CustomerController {
 
         Map<String,Object> custValidation = validation.customerValidation(customer);
         Map<String,Object> response = new HashMap<>();
-        Customer customer1 = customerService.getCustomer(customer.getCustomerId());
+//        Customer customer1 = customerService.getCustomer(customer.getCustomerId());
 
         if(custValidation.isEmpty()){
-//            Customer customer1 = customerService.saveOrUpadateCustomer(customer);
+            Customer customer1 = customerService.saveOrUpadateCustomer(customer);
             response.put("Status","Success");
             response.put("Message","Data updated Successfully");
+            response.put("Customer",customer1);
         }
         else{
             response.put("Status","Fail");
