@@ -42,11 +42,18 @@ public class DriverDAOImpl implements DriverDAO {
         Session session = entityManager.unwrap(Session.class);
 
         if(driver.getDriverId()==0){
+            driver.setAvailable(true);
             session.save(driver);
         }
         else{
             try {
-                session.update(driver);
+
+                Driver driver1 = session.get(Driver.class,driver.getDriverId());
+
+                driver1.setContactNo(driver.getContactNo());
+                driver1.setName(driver.getName());
+
+                session.update(driver1);
             }
             catch (Exception e){
 
@@ -85,7 +92,49 @@ public class DriverDAOImpl implements DriverDAO {
         Session session = entityManager.unwrap(Session.class);
 
         Query<Driver> query = session.createQuery("from Driver where is_available=:isAvailable and is_delete=0");
+        query.setParameter("isAvailable",isAvailable);
         List<Driver> availableDrivers = query.getResultList();
         return availableDrivers;
+    }
+
+    @Override
+    public Driver getDriverByEmail(String email) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Driver> query = session.createQuery("from Driver where email=:email and is_delete=0");
+        query.setParameter("email",email);
+        try{
+            Driver driver = query.getSingleResult();
+            return driver;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public Driver getDriverByContactNo(String contact) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Driver> query = session.createQuery("from Driver where contact_no=:contact and is_delete=0");
+        query.setParameter("contact",contact);
+        try{
+            Driver driver = query.getSingleResult();
+            return driver;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public void setDriverAvailability(int driverId) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query query = session.createQuery("update Driver set is_available=1 where driver_id=:driverId");
+
+        query.setParameter("driverId",driverId);
+        query.executeUpdate();
+
     }
 }

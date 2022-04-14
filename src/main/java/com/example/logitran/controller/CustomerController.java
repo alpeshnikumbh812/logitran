@@ -5,6 +5,7 @@ import com.example.logitran.entity.Customer;
 import com.example.logitran.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @PostMapping("/save")
+    @PostMapping(value = "/save",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,Object>> save(@RequestBody Customer customer){
 
         Map<String,Object> custValidation = validation.customerValidation(customer);
@@ -49,7 +50,7 @@ public class CustomerController {
          return ResponseEntity.accepted().body(response);
     }
 
-    @PostMapping("/update")
+    @PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,Object>> update(@RequestBody Customer customer){
 
         Map<String,Object> custValidation = validation.customerValidation(customer);

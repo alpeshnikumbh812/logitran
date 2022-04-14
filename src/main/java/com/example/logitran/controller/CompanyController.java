@@ -55,6 +55,7 @@ public class CompanyController {
     }
 
     //for company use and admin
+    @PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String,Object>> update(@RequestBody Company company){
 
         Map<String,Object> compValidation = validation.companyValidation(company);

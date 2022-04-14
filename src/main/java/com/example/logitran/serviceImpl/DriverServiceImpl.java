@@ -51,7 +51,15 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    @Transactional
     public List<Driver> isDriverAvailable(boolean isAvailable) {
         return driverDAO.isAvailable(isAvailable);
     }
+
+    @Override
+    @Transactional
+    public void setDriverAvailability(int driverId) {
+        driverDAO.setDriverAvailability(driverId);
+    }
+
 }

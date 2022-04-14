@@ -13,4 +13,9 @@ public interface DriverDAO {
     public String deleteDriver(int driverId);
     public void deleteByCompanyId(int companyId);
     public List<Driver> isAvailable(boolean isAvailable);
+    public Driver getDriverByEmail(String email);
+
+    public Driver getDriverByContactNo(String contact);
+
+    public void setDriverAvailability(int driverId);
 }

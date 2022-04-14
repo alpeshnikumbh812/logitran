@@ -11,4 +11,6 @@ public interface DriverService {
     public Driver saveOrUpadateDriver(Driver driver);
     public String deleteDriver(int driverId);
     public List<Driver> isDriverAvailable(boolean isAvailable);
+
+    public void setDriverAvailability(int driverId);
 }

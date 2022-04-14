@@ -5,6 +5,7 @@ import com.example.logitran.entity.Vehicle;
 import com.example.logitran.service.CompanyService;
 import com.example.logitran.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,14 @@ public class VehicleController {
         return vehicleService.getVehicles();
     }
 
-    @PostMapping("/saveOrUpdate")
-    public Vehicle saveOrUpdate(@RequestBody Vehicle vehicle){
+    @PostMapping(value = "/save",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public Vehicle save(@RequestBody Vehicle vehicle){
+
+        return vehicleService.saveOrUpadateVehicle(vehicle);
+    }
+
+    @PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public Vehicle update(@RequestBody Vehicle vehicle){
 
         return vehicleService.saveOrUpadateVehicle(vehicle);
     }

@@ -3,9 +3,11 @@ package com.example.logitran.Validation;
 import com.example.logitran.dao.AdminDAO;
 import com.example.logitran.dao.CompanyDAO;
 import com.example.logitran.dao.CustomerDAO;
+import com.example.logitran.dao.DriverDAO;
 import com.example.logitran.entity.Admin;
 import com.example.logitran.entity.Company;
 import com.example.logitran.entity.Customer;
+import com.example.logitran.entity.Driver;
 import com.example.logitran.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,6 +31,9 @@ public class Validation {
 
     @Autowired
     AdminDAO adminDAO;
+
+    @Autowired
+    DriverDAO driverDAO;
 
     private final String userExist = "Email already registered";
     private final String contactExist = "Contact number already registered";
@@ -84,9 +89,27 @@ public class Validation {
         return messages;
     }
 
+    public Map<String,Object> driverValidation(Driver driver){
+
+        Map<String,Object> messages = new HashMap<>();
+
+        Driver driver1 = driverDAO.getDriverByEmail(driver.getEmail());
+        System.out.println(driver1);
+        if(driver1!=null && driver.getDriverId()==0){
+            messages.put("Email",userExist);
+        }
+
+        driver1 = driverDAO.getDriverByContactNo(driver.getContactNo());
+
+        if(driver1!=null && driver.getCompanyId()!=driver1.getDriverId()){
+            messages.put("Contact",contactExist);
+        }
+
+        return messages;
+    }
 
     @ResponseBody
-    @ExceptionHandler
+//    @ExceptionHandler
     public Map<String,Object> customerValidation(Exception e){
 
         Map<String,Object> message = new HashMap<>();
