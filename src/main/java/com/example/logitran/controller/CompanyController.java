@@ -5,6 +5,7 @@ import com.example.logitran.entity.Company;
 import com.example.logitran.entity.Customer;
 import com.example.logitran.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,10 +34,24 @@ public class CompanyController {
     }
 
     //for company use and admin
-    @PostMapping("/save")
-    public Company save(@RequestBody Company company){
+    @PostMapping(value = "/save",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String,Object>> save(@RequestBody Company company){
 
-        return companyService.saveOrUpadateCompany(company);
+        Map<String,Object> compValidation = validation.companyValidation(company);
+        Map<String,Object> response = new HashMap<>();
+
+        if(compValidation.isEmpty()){
+            Company company1 = companyService.saveOrUpadateCompany(company);
+            response.put("Status","Success");
+            response.put("Message","Data save Successfully");
+        }
+        else{
+            response.put("Status","Fail");
+            response.put("Message",compValidation);
+            return ResponseEntity.badRequest().body(compValidation);
+        }
+
+        return ResponseEntity.accepted().body(response);
     }
 
     //for company use and admin

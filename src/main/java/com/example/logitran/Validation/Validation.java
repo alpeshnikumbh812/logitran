@@ -1,7 +1,9 @@
 package com.example.logitran.Validation;
 
+import com.example.logitran.dao.AdminDAO;
 import com.example.logitran.dao.CompanyDAO;
 import com.example.logitran.dao.CustomerDAO;
+import com.example.logitran.entity.Admin;
 import com.example.logitran.entity.Company;
 import com.example.logitran.entity.Customer;
 import com.example.logitran.service.CustomerService;
@@ -24,6 +26,9 @@ public class Validation {
 
     @Autowired
     CompanyDAO companyDAO;
+
+    @Autowired
+    AdminDAO adminDAO;
 
     private final String userExist = "Email already registered";
     private final String contactExist = "Contact number already registered";
@@ -65,6 +70,20 @@ public class Validation {
 
         return messages;
     }
+
+    public Map<String,Object> adminValidation(Admin admin){
+
+        Map<String,Object> messages = new HashMap<>();
+
+        Admin admin1 = adminDAO.getAdminByusername(admin.getEmail());
+
+        if(admin1!=null && admin.getAdminId()==0){
+            messages.put("Email",userExist);
+        }
+
+        return messages;
+    }
+
 
     @ResponseBody
     @ExceptionHandler
