@@ -1,13 +1,7 @@
 package com.example.logitran.Validation;
 
-import com.example.logitran.dao.AdminDAO;
-import com.example.logitran.dao.CompanyDAO;
-import com.example.logitran.dao.CustomerDAO;
-import com.example.logitran.dao.DriverDAO;
-import com.example.logitran.entity.Admin;
-import com.example.logitran.entity.Company;
-import com.example.logitran.entity.Customer;
-import com.example.logitran.entity.Driver;
+import com.example.logitran.dao.*;
+import com.example.logitran.entity.*;
 import com.example.logitran.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,74 +29,90 @@ public class Validation {
     @Autowired
     DriverDAO driverDAO;
 
+    @Autowired
+    VehicleDAO vehicleDAO;
+
     private final String userExist = "Email already registered";
     private final String contactExist = "Contact number already registered";
 
-    public Map<String,Object> customerValidation(Customer customer){
+    public Map<String, Object> customerValidation(Customer customer) {
 
-        Map<String,Object> messages = new HashMap<>();
+        Map<String, Object> messages = new HashMap<>();
 
         Customer customer1 = customerDAO.getCustomerByEmail(customer.getEmail());
 
-        if(customer1!=null && customer.getCustomerId()==0){
-            messages.put("Email",userExist);
+        if (customer1 != null && customer.getCustomerId() == 0) {
+            messages.put("Email", userExist);
         }
 
         customer1 = customerDAO.getCustomerByContact(customer.getContactNo());
 
-        if(customer1!=null && customer.getCustomerId()!=customer1.getCustomerId() ){
-            messages.put("Contact",contactExist);
+        if (customer1 != null && customer.getCustomerId() != customer1.getCustomerId()) {
+            messages.put("Contact", contactExist);
         }
 
         return messages;
     }
 
-    public Map<String,Object> companyValidation(Company company){
+    public Map<String, Object> companyValidation(Company company) {
 
-        Map<String,Object> messages = new HashMap<>();
+        Map<String, Object> messages = new HashMap<>();
 
         Company company1 = companyDAO.getCompanyByEmailId(company.getEmail());
 
-        if(company1!=null && company.getCompanyId()==0){
-            messages.put("Email",userExist);
+        if (company1 != null && company.getCompanyId() == 0) {
+            messages.put("Email", userExist);
         }
 
         company1 = companyDAO.getCustomerByContact(company.getContactNo());
 
-        if(company1!=null && company.getCompanyId()!=company1.getCompanyId()){
-            messages.put("Contact",contactExist);
+        if (company1 != null && company.getCompanyId() != company1.getCompanyId()) {
+            messages.put("Contact", contactExist);
         }
 
         return messages;
     }
 
-    public Map<String,Object> adminValidation(Admin admin){
+    public Map<String, Object> adminValidation(Admin admin) {
 
-        Map<String,Object> messages = new HashMap<>();
+        Map<String, Object> messages = new HashMap<>();
 
         Admin admin1 = adminDAO.getAdminByusername(admin.getEmail());
 
-        if(admin1!=null && admin.getAdminId()==0){
-            messages.put("Email",userExist);
+        if (admin1 != null && admin.getAdminId() == 0) {
+            messages.put("Email", userExist);
         }
 
         return messages;
     }
 
-    public Map<String,Object> driverValidation(Driver driver){
+    public Map<String, Object> driverValidation(Driver driver) {
 
-        Map<String,Object> messages = new HashMap<>();
+        Map<String, Object> messages = new HashMap<>();
 
         Driver driver1 = driverDAO.getDriverByEmail(driver.getEmail());
         System.out.println(driver1);
-        if(driver1!=null && driver.getDriverId()==0){
-            messages.put("Email",userExist);
+        if (driver1 != null && driver.getDriverId() == 0) {
+            messages.put("Email", userExist);
         }
 
         driver1 = driverDAO.getDriverByContactNo(driver.getContactNo());
 
-        if(driver1!=null && driver.getCompanyId()!=driver1.getDriverId()){
-            messages.put("Contact",contactExist);
+        if (driver1 != null && driver.getCompanyId() != driver1.getDriverId()) {
+            messages.put("Contact", contactExist);
+        }
+
+        return messages;
+    }
+
+    public Map<String, Object> vhicalValidation(Vehicle vehicle) {
+
+        Map<String, Object> messages = new HashMap<>();
+
+        Vehicle vehicle1 = vehicleDAO.getvehicleByVehicalNumber(vehicle.getVehicleNo());
+        System.out.println(vehicle1);
+        if (vehicle1 != null) {
+            messages.put("Vehicle", "Vehicle number already register");
         }
 
         return messages;
@@ -110,10 +120,10 @@ public class Validation {
 
     @ResponseBody
 //    @ExceptionHandler
-    public Map<String,Object> customerValidation(Exception e){
+    public Map<String, Object> customerValidation(Exception e) {
 
-        Map<String,Object> message = new HashMap<>();
-        message.put("Contact",contactExist);
+        Map<String, Object> message = new HashMap<>();
+        message.put("Contact", contactExist);
         return message;
     }
 }

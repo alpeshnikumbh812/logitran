@@ -104,4 +104,20 @@ public class VehicleDAOImpl implements VehicleDAO {
 
         return vehicleByCompanyId;
     }
+
+    @Override
+    public Vehicle getvehicleByVehicalNumber(String vehicleNo) {
+
+        Session session = entityManager.unwrap(Session.class);
+        Query<Vehicle> query = session.createQuery("from Vehicle where vehicle_no=:vehicleNo and is_delete=0");
+        query.setParameter("vehicleNo",vehicleNo);
+
+        try{
+            Vehicle vehicle = query.getSingleResult();
+            return vehicle;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
 }

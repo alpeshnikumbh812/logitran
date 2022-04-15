@@ -15,4 +15,6 @@ public interface VehicleDAO {
     public void deleteVehicleOfDeletedDrivers(int companyId);
     public List<Vehicle> findVehicleByCompanyId(int companyId);
 
+    public Vehicle getvehicleByVehicalNumber(String vehicleNo);
+
 }
