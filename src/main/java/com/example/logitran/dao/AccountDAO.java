@@ -1,5 +1,6 @@
 package com.example.logitran.dao;
 
+import com.example.logitran.Request.UserRequest;
 import com.example.logitran.entity.Account;
 import com.example.logitran.entity.Customer;
 
@@ -17,6 +18,6 @@ public interface AccountDAO {
 
     public int getAccountId(int accInd);
 
-    public Account getAccountByEmail(String email);
+    public Account getAccount(UserRequest userRequest);
 
 }

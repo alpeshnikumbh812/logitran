@@ -29,8 +29,9 @@ public class AdminController {
         Map<String,Object> response = new HashMap<>();
 
         if(adminValidation.isEmpty()){
-
+            System.out.println("check1");
            adminService.addAdmin(admin);
+            System.out.println("check2");
             response.put("Status","Success");
             response.put("Message","Entry Save Successfully");
         }

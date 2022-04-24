@@ -1,5 +1,6 @@
 package com.example.logitran.daoimpl;
 
+import com.example.logitran.Request.UserRequest;
 import com.example.logitran.dao.AccountDAO;
 import com.example.logitran.entity.Account;
 import com.example.logitran.entity.Customer;
@@ -77,12 +78,16 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public Account getAccountByEmail(String email) {
+    public Account getAccount(UserRequest userRequest) {
 
         Session session = entityManager.unwrap(Session.class);
+        String email = userRequest.getEmail();
+        String password = userRequest.getPassword();
 
-        Query<Account> query = session.createQuery("from Account where username=:email",Account.class);
+        Query<Account> query = session.createQuery("from Account where username=:email and password=:password",Account.class);
         query.setParameter("email",email);
+        query.setParameter("password",password);
+
         Account account = null;
 
         try {
