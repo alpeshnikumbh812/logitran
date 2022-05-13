@@ -42,6 +42,9 @@ public class Company {
     @Column(name="acc_id")
     private int accId;
 
+    @Column(name = "rate")
+    private int rate;
+
     @JsonIgnore
     @Column(columnDefinition = "TINYINT")
     @Type(type = "org.hibernate.type.NumericBooleanType")
